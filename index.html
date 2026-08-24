@@ -303,7 +303,7 @@ html.reveal-animation .reveal:not(.show) { opacity:0; transform:translateY(64px)
 </head>
 
 <body>
-<audio id="weddingMusic" preload="auto" loop><source src="music/wedding-music.mp3" type="audio/mpeg"></audio>
+<audio id="weddingMusic" preload="auto" loop><source src="wedding-music.mp3" type="audio/mpeg"></audio>
 
 <div id="envelope-screen" role="button" tabindex="0" aria-label="Открыть приглашение">
   <div class="envelope-stage">
@@ -445,7 +445,7 @@ function buildCalendar(){
  for(let n=1;n<=days;n++)out+=`<div class="day ${n===selected?"selected":""}">${n}</div>`;
  document.getElementById("calendarGrid").innerHTML=out;
 }
-const audio=new Audio("wedding-music.mp3");audio.loop=true;let playing=false;
+const audio=document.getElementById("weddingMusic");audio.loop=true;let playing=false;
 document.getElementById("musicBtn").onclick=async()=>{
  if(!playing){try{await audio.play();playing=true;musicBtn.textContent="❚❚";}catch(e){}}
  else{audio.pause();playing=false;musicBtn.textContent="♪";}
@@ -532,6 +532,8 @@ setTimeout(startRevealSystem,1500);
       if(e){e.preventDefault();e.stopPropagation();}
       if(opened)return; opened=true;
       screen.classList.add('opening');
+      var music=document.getElementById('weddingMusic');
+      if(music){ music.volume=0.55; var p=music.play(); if(p&&p.then){ p.then(function(){ playing=true; var mb=document.getElementById('musicBtn'); if(mb) mb.textContent='❚❚'; }).catch(function(){}); } }
       setTimeout(function(){
         screen.classList.add('hidden');
         document.documentElement.classList.remove('envelope-lock');
