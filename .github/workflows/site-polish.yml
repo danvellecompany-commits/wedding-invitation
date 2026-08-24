@@ -1,0 +1,49 @@
+name: Polish wedding invitation
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  polish:
+    if: github.event.head_commit.message != 'Polish wedding invitation'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Apply requested changes
+        shell: python
+        run: |
+          from pathlib import Path
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          # 1) Remove duplicated time from the venue section.
+          s = s.replace('    <p class="location-time">Время: <strong id="locationTime">14:30</strong></p>\n', '')
+          s = s.replace(' document.getElementById("locationTime").textContent=cfg.time;\n', '')
+          s = s.replace('document.getElementById("locationTime").textContent=cfg.time;\n', '')
+
+          # 2) Make venue name/address easier to read.
+          css = '''\n<style id="venue-readability-final">\n.venue-address, #venueName {\n  font-family:"Cormorant Garamond",Georgia,serif !important;\n  font-size:24px !important;\n  line-height:1.45 !important;\n}\n.venue-address .hall-note { font-size:23px !important; }\n@media(max-width:420px){\n  .venue-address, #venueName { font-size:22px !important; }\n  .venue-address .hall-note { font-size:21px !important; }\n}\n</style>\n'''
+          if 'id="venue-readability-final"' not in s:
+              s = s.replace('</head>', css + '\n</head>', 1)
+
+          # 4) Make the selected RSVP button unmistakable: selected = gold, unselected = pale.
+          vote_css = '''\n<style id="vote-selection-final">\n.vote-buttons .vote-btn {\n  background:rgba(255,255,255,.72) !important;\n  color:var(--ink) !important;\n  border:1px solid var(--gold) !important;\n  box-shadow:none !important;\n}\n.vote-buttons .vote-btn.active {\n  background:var(--gold) !important;\n  color:#fff !important;\n  transform:translateY(-2px) scale(1.01);\n  box-shadow:0 9px 24px rgba(111,93,53,.24) !important;\n}\n.vote-buttons .vote-btn:not(.active):hover {\n  background:#f4ead7 !important;\n}\n</style>\n'''
+          if 'id="vote-selection-final"' not in s:
+              s = s.replace('</head>', vote_css + '\n</head>', 1)
+
+          p.write_text(s, encoding='utf-8')
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Polish wedding invitation"
+          git push
