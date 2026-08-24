@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Приглашение на свадьбу</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@400;500;600&family=Marck+Script&family=Great+Vibes&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#fffefa; --paper2:#fbfaf7; --ink:#2d2925; --gold:#ad9658;
+  --card:#ffffff; --line:#d8c99f;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:#f4f3ef;color:var(--ink);font-family:"Cormorant Garamond",Georgia,serif}
+.page{max-width:520px;margin:0 auto;background:#fff;min-height:100vh;overflow:hidden;box-shadow:0 0 40px #0002;position:relative}.page:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.42;background-image:linear-gradient(112deg,rgba(255,255,255,.9) 0%,rgba(232,226,215,.18) 18%,rgba(255,255,255,.72) 36%,rgba(224,216,202,.16) 54%,rgba(255,255,255,.82) 72%,rgba(231,224,212,.18) 88%,rgba(255,255,255,.9) 100%),repeating-linear-gradient(104deg,rgba(190,176,150,.045) 0 2px,rgba(255,255,255,.16) 2px 7px),radial-gradient(circle at 18% 24%,rgba(190,176,150,.12) 0 1px,transparent 1.8px),radial-gradient(circle at 82% 72%,rgba(190,176,150,.09) 0 1px,transparent 1.8px);background-size:100% 100%,100% 100%,23px 23px,31px 31px;mix-blend-mode:multiply}.page>section{z-index:1}
+section{position:relative;padding:58px 34px;background:linear-gradient(120deg,#ffffff 0%,#faf9f6 48%,#ffffff 100%)}section:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:0;opacity:.34;background:repeating-linear-gradient(108deg,rgba(255,255,255,.72) 0 18px,rgba(214,205,190,.06) 18px 23px,rgba(255,255,255,.62) 23px 41px);mix-blend-mode:multiply}section>*{position:relative;z-index:1}
+h1,h2,h3{font-family:"Cormorant Garamond",Georgia,serif;font-weight:500}
+h2{font-size:38px;line-height:1.05;margin:0 0 28px;text-align:center;letter-spacing:.03em}
+p{line-height:1.65;margin:0 auto 20px;text-align:center;font-size:17px;letter-spacing:.015em}
+.hero{height:100svh;min-height:610px;padding:0;display:flex;align-items:flex-end;background:#111}
+.hero img{position:absolute;inset:-1%;width:102%;height:102%;object-fit:cover;filter:blur(.7px);transform:scale(1.005)}
+.hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0005 0%,#0004 45%,#000a 100%)}
+.hero-content{position:relative;z-index:2;width:100%;padding:40px 28px 55px;color:white;text-align:center}
+.names{font-family:"Marck Script","Cormorant Garamond",cursive;font-size:68px;line-height:.9;letter-spacing:.03em;text-shadow:0 2px 12px rgba(0,0,0,.18)}
+.amp{font-size:30px;margin:8px 0}
+.hero-sub{font-family:"Cormorant Garamond",Georgia,serif;font-size:20px;letter-spacing:.12em;margin:22px 0 12px}
+.date{font-family:"Cormorant Garamond",Georgia,serif;font-size:22px;letter-spacing:.25em}
+.music{position:fixed;z-index:50;right:18px;bottom:18px;width:48px;height:48px;border-radius:50%;border:1px solid #fff8;background:#b5a16bcc;color:white;cursor:pointer;font-size:18px}
+.open-btn,.gold-btn{display:inline-block;border:0;border-radius:12px;background:var(--gold);color:white;padding:14px 28px;font:600 14px Montserrat;box-shadow:0 7px 18px #6f5d3528;cursor:pointer;text-decoration:none}
+.hero .open-btn{margin-top:25px;background:#b8a771e8}
+.divider{width:100px;height:1px;background:var(--line);margin:0 auto 30px;position:relative}
+.divider:after{content:"♡";position:absolute;left:50%;top:-13px;transform:translateX(-50%);background:#fff;padding:0 10px;color:var(--gold)}
+.photo{width:100%;display:block;object-fit:cover}
+.photo.small{max-width:280px;margin:25px auto}.venue-photo{width:100%;max-width:430px;height:240px;border-radius:16px;object-fit:cover;margin:28px auto 0;box-shadow:0 14px 35px #5b4a3022}
+.photo-round{width:150px;height:150px;border-radius:50%;object-fit:cover;display:block;margin:auto}
+.couple{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:30px}
+.person{text-align:center}
+.person img{width:152px;height:152px;border-radius:50%;object-fit:cover;object-position:50% 28%;margin:auto;border:5px solid #fff;opacity:0;transform:scale(.82) translateY(20px);filter:blur(5px);transition:opacity 1s ease,transform 1s cubic-bezier(.2,.8,.2,1),filter 1s ease;box-shadow:0 12px 30px #5b4a3020}.couple-section.show .person img{opacity:1;transform:none;filter:none}.couple-section.show .person:nth-child(2) img{transition-delay:.18s}
+.person div{font:24px "Cormorant Garamond",Georgia,serif;margin-top:12px}
+.heart-bg{background-image:radial-gradient(circle,#b5a16b 0 4px,transparent 5px);background-size:42px 42px}
+.menu-icon{font-size:44px;text-align:center;color:var(--gold);margin-bottom:15px}
+.menu-list{max-width:390px;margin:auto}
+.menu-item{display:flex;justify-content:space-between;gap:15px;padding:14px 0;border-bottom:1px solid #c8b88d88;font-family:"Cormorant Garamond";font-size:22px}
+.note{background:#f9f8f5cc;padding:35px 28px;margin:10px auto;border-radius:2px;box-shadow:0 12px 30px #8a74551c;position:relative}
+.note:before{content:"";position:absolute;width:26px;height:38px;border:2px solid #aaa;border-radius:50%;left:18px;top:-18px;transform:rotate(-12deg);opacity:.6}
+.calendar{max-width:360px;margin:30px auto;padding:25px;border:1px solid var(--line);border-radius:22px;background:#f7f0e5b8}
+.cal-title{text-align:center;font:32px "Cormorant Garamond";margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;text-align:center;font:13px "Cormorant Garamond"}
+.day{padding:6px 0}
+.selected{border:1px solid var(--gold);border-radius:50%;background:#f4e6b8}
+.gallery{display:grid;gap:12px}
+.gallery img{width:100%;display:block}
+.location{padding-bottom:85px}
+.map-card{background:#ddd5c8;height:250px;position:relative;overflow:hidden;margin:30px -34px 25px}
+.map-card:before,.map-card:after{content:"";position:absolute;background:#c4d4df;opacity:.8}
+.map-card:before{width:130%;height:20px;left:-20%;top:45%;transform:rotate(-18deg)}
+.map-card:after{width:120%;height:14px;left:-10%;top:62%;transform:rotate(28deg)}
+.pin{position:absolute;left:50%;top:50%;transform:translate(-50%,-100%);font-size:48px}
+.rsvp{background:#f8f7f4;padding:35px 22px;border-radius:4px;box-shadow:0 12px 30px #8a74551c}
+input,textarea,select{width:100%;padding:14px 15px;border:1px solid #d5ccbd;background:white;border-radius:10px;margin:7px 0 10px;font:14px Montserrat}
+textarea{min-height:100px;resize:vertical}
+.footer{text-align:center;padding:55px 30px 75px}
+.footer .names{font-size:55px;color:var(--ink)}
+.reveal{opacity:1;transform:none;filter:none;transition:opacity 1.8s cubic-bezier(.2,.7,.2,1),transform 1.8s cubic-bezier(.2,.8,.2,1),filter 1.8s ease}
+html.reveal-animation .reveal:not(.show){opacity:0;transform:translateY(58px) scale(.985);filter:blur(5px)}
+.reveal.show{opacity:1;transform:none;filter:none}
+.hero-content{animation:heroRise 2.1s cubic-bezier(.2,.8,.2,1) both}.names{animation:heroNames 2.2s cubic-bezier(.2,.8,.2,1) .15s both}.hero-sub{animation:heroText 1.8s ease .65s both}.date{animation:heroText 1.8s ease .9s both}
+@keyframes heroRise{from{opacity:0;transform:translateY(55px)}to{opacity:1;transform:none}}@keyframes heroNames{from{opacity:0;transform:translateY(24px) scale(.94);letter-spacing:.12em}to{opacity:1;transform:none;letter-spacing:.03em}}@keyframes heroText{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+.place-time,.location-time{font:23px "Cormorant Garamond",Georgia,serif!important}.venue-photo{margin:22px auto 28px;border-radius:18px;box-shadow:0 18px 38px #5b4a3020}
+
+.couple-section{background:linear-gradient(120deg,#ffffff,#faf9f5 50%,#ffffff)}
+.couple-section h2{margin-bottom:32px}
+.wedding-time{font:22px "Cormorant Garamond",Georgia,serif!important;color:var(--ink);margin-bottom:18px}
+.calendar-time{text-align:center;font:22px "Cormorant Garamond",Georgia,serif;color:var(--gold);margin-bottom:8px}
+.vote-card{background:#f8f4ee;padding:28px 22px;border-radius:14px;box-shadow:0 12px 30px #8a74551c}
+.vote-buttons{display:grid;gap:12px;margin:18px 0}
+.vote-btn{border:1px solid var(--gold);border-radius:12px;background:var(--gold);color:#fff;padding:15px;font:600 14px Montserrat;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}
+.vote-btn.secondary{background:transparent;color:var(--ink)}
+.vote-btn.active{transform:translateY(-2px);box-shadow:0 8px 20px #6f5d3530}
+.vote-status{text-align:center;min-height:20px;font:18px "Cormorant Garamond",Georgia,serif;color:var(--gold)}
+.vote-input{width:100%;box-sizing:border-box;padding:13px 14px;border:1px solid #d5ccbd;background:white;border-radius:10px;margin:7px 0 10px;font:14px Montserrat}
+.vote-send{width:100%;margin-top:8px}
+.editor{position:fixed;inset:0;background:#171717eF;z-index:100;display:none;overflow:auto;padding:20px}
+.editor.open{display:block}
+.editor-box{max-width:520px;margin:0 auto;background:#f5ead9;padding:24px;border-radius:18px}
+.editor h2{font-size:32px}
+.editor label{display:block;font-size:12px;margin-top:12px}
+.editor input,.editor textarea{background:white}
+.editor-actions{display:flex;gap:10px;position:sticky;bottom:0;background:#f5ead9;padding-top:15px}
+.editor-actions button{flex:1}
+.small-note{font-size:12px;color:#665f57;line-height:1.5}
+@media(max-width:420px){.names{font-size:56px}.hero{min-height:600px}section{padding-left:24px;padding-right:24px}.map-card{margin-left:-24px;margin-right:-24px}}
+</style>
+
+<style>
+#welcomeText, #welcomeText2, .guest-text, .welcome-text, .intro-text {
+  font-size: 19px !important;
+  line-height: 1.8 !important;
+}
+.hall-note {
+  display:inline-block;
+  margin-top:8px;
+  font-size:20px;
+  font-family:"Cormorant Garamond", Georgia, serif;
+}
+</style>
+
+<style id="envelope-final-css">
+html.envelope-lock,html.envelope-lock body{overflow:hidden!important;height:100%!important}
+#envelope-screen{position:fixed;inset:0;z-index:2147483647;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 28%,#fff 0,#fbf9f5 58%,#eee9df 100%);cursor:pointer;opacity:1;visibility:visible;transition:opacity .7s ease,visibility .7s ease}
+#envelope-screen.hidden{opacity:0;visibility:hidden;pointer-events:none}
+.envelope-stage{width:min(92vw,460px);height:min(82vh,620px);position:relative;display:flex;align-items:center;justify-content:center}
+.envelope-wrap{position:relative;width:min(86vw,390px);height:245px;transform:translateY(0);transition:transform .15s ease;filter:drop-shadow(0 18px 22px rgba(40,30,15,.14));}
+.envelope-back,.envelope-front{position:absolute;inset:0;border:1px solid #d3b77b;border-radius:7px;background:#fffdf8;pointer-events:none}
+.envelope-back{background:linear-gradient(145deg,#fffefa,#f4eadb);z-index:1}
+.envelope-front{z-index:5;background:linear-gradient(145deg,#fffdf9,#f2e7d7);clip-path:polygon(0 0,50% 48%,100% 0,100% 100%,0 100%);}
+.envelope-flap{position:absolute;left:0;right:0;top:0;height:67%;z-index:7;background:linear-gradient(145deg,#fffefa,#f2e7d8);border:1px solid #d3b77b;clip-path:polygon(0 0,100% 0,50% 88%);transform-origin:50% 0;transition:transform 1s cubic-bezier(.18,.78,.2,1);backface-visibility:hidden;pointer-events:none}
+.envelope-letter{position:absolute;left:9%;right:9%;bottom:8px;height:88%;z-index:3;background:#fffefa;border:1px solid #d3b77b;border-radius:5px;box-shadow:0 12px 24px rgba(40,30,15,.15);transform:translateY(17%) scale(.97);opacity:.98;transition:transform 1s cubic-bezier(.15,.78,.2,1),opacity .7s ease;pointer-events:none}
+.envelope-letter:before{content:"";position:absolute;inset:12px;border:1px solid rgba(177,145,84,.35)}
+.letter-kicker{position:absolute;top:38px;left:0;right:0;text-align:center;font:11px Montserrat,Arial,sans-serif;letter-spacing:2.4px;color:#aa8c57}
+.letter-names{position:absolute;top:75px;left:12px;right:12px;text-align:center;font:36px "Cormorant Garamond",Georgia,serif;letter-spacing:1px;color:#222732}
+.letter-date{position:absolute;top:132px;left:0;right:0;text-align:center;font:18px "Cormorant Garamond",Georgia,serif;color:#9c8050}
+.envelope-seal{position:absolute;z-index:10;left:50%;top:49%;width:62px;height:62px;transform:translate(-50%,-50%);border-radius:50%;border:1px solid #b8924d;background:#fffdf9;box-shadow:0 8px 18px rgba(40,30,15,.15);display:flex;align-items:center;justify-content:center;color:#b8924d;font:31px "Cormorant Garamond",Georgia,serif;transition:transform .45s ease,opacity .35s ease;pointer-events:none}
+.envelope-title{position:absolute;z-index:8;left:0;right:0;bottom:26px;text-align:center;font:29px "Cormorant Garamond",Georgia,serif;letter-spacing:2px;color:#202630;pointer-events:none}
+.envelope-hint{position:absolute;top:calc(50% + 150px);left:0;right:0;text-align:center;color:#9d875f;font:13px Montserrat,Arial,sans-serif;animation:envelopeHint 2.2s ease-in-out infinite;pointer-events:none}
+@keyframes envelopeHint{0%,100%{opacity:.5;transform:translateY(0)}50%{opacity:1;transform:translateY(-4px)}}
+#envelope-screen.opening .envelope-flap{transform:rotateX(176deg)}
+#envelope-screen.opening .envelope-seal{transform:translate(-50%,-50%) scale(1.35);opacity:0}
+#envelope-screen.opening .envelope-letter{transform:translateY(-78%) scale(1.02);opacity:1}
+#envelope-screen.opening .envelope-wrap{animation:envelopeExit 1.45s cubic-bezier(.2,.72,.2,1) forwards}
+@keyframes envelopeExit{0%{transform:translateY(0)}65%{transform:translateY(-18vh)}100%{transform:translateY(-65vh) scale(.92);opacity:0}}
+@media(max-width:480px){.envelope-wrap{height:225px}.letter-names{font-size:32px}.envelope-title{font-size:26px}.envelope-hint{top:calc(50% + 140px)}}
+</style>
+
+
+<style id="satin-and-punctuality">
+.no-late{margin:18px auto 4px;text-align:center;font-family:"Cormorant Garamond",Georgia,serif;font-size:26px;font-weight:600;letter-spacing:.12em;color:#9a7b43;text-transform:uppercase}
+@media(max-width:420px){.no-late{font-size:23px;letter-spacing:.08em}}
+</style>
+
+<style id="final-satin-hearts-scroll">
+/* ПОЛНОЦЕННАЯ АТЛАСНАЯ ФАКТУРА — применяется ко всем белым секциям, кроме первой страницы */
+.page,
+.page > section:not(.hero),
+.page > section:not(.hero) .couple-section,
+.page > section:not(.hero) .calendar {
+  background-color:#fffdf9 !important;
+  background-image:
+    linear-gradient(rgba(255,255,255,.08),rgba(255,255,255,.08)),
+    url("satin-bg.jpg") !important;
+  background-repeat:repeat-y !important;
+  background-size:100% auto !important;
+  background-position:center top !important;
+  background-attachment:scroll !important;
+}
+/* Первая страница остаётся только с фотографией — без атласа */
+.hero,
+.hero-content { background-image:none !important; }
+.page:before { opacity:.05 !important; }
+section:after { opacity:.06 !important; }
+
+/* Полупрозрачные внутренние карточки, чтобы атлас был виден и под ними */
+.note,
+.rsvp,
+.vote-card,
+.calendar { background-color:rgba(255,253,249,.68) !important; }
+
+/* Tighter transition between the welcome text and portraits */
+#invite { padding-bottom: 28px !important; }
+.couple-section { padding-top: 28px !important; padding-bottom: 42px !important; }
+.couple { margin-top: 8px !important; }
+
+/* Subtle, continuously appearing hearts around Arina's portrait */
+.person { position:relative; }
+.person:nth-child(2)::before,
+.person:nth-child(2)::after {
+  position:absolute;
+  pointer-events:none;
+  z-index:3;
+  color:#b89a62;
+  font-family:"Cormorant Garamond", Georgia, serif;
+  content:"♡";
+  opacity:0;
+  text-shadow:0 2px 8px rgba(120,90,40,.12);
+}
+.person:nth-child(2)::before { right:8%; top:12%; font-size:30px; animation:ariaHeartOne 5.8s ease-in-out infinite; }
+.person:nth-child(2)::after { right:-3%; top:34%; font-size:19px; animation:ariaHeartTwo 5.8s ease-in-out 2.8s infinite; }
+@keyframes ariaHeartOne {
+  0%,100% { opacity:0; transform:translate3d(0,12px,0) scale(.72) rotate(-8deg); }
+  18% { opacity:.72; }
+  45% { opacity:.95; transform:translate3d(5px,-9px,0) scale(1) rotate(5deg); }
+  72% { opacity:.22; transform:translate3d(-2px,-24px,0) scale(.86) rotate(-3deg); }
+  84% { opacity:0; transform:translate3d(0,-31px,0) scale(.72); }
+}
+@keyframes ariaHeartTwo {
+  0%,100% { opacity:0; transform:translate3d(0,10px,0) scale(.65); }
+  20% { opacity:.55; }
+  48% { opacity:.85; transform:translate3d(-4px,-10px,0) scale(1); }
+  78% { opacity:0; transform:translate3d(3px,-27px,0) scale(.7); }
+}
+
+/* Scroll reveals: trigger when the user actually reaches the block */
+.reveal {
+  transition:opacity 2.2s cubic-bezier(.18,.72,.18,1),transform 2.2s cubic-bezier(.18,.78,.18,1),filter 2.2s ease !important;
+}
+html.reveal-animation .reveal:not(.show) { opacity:0; transform:translateY(64px) scale(.985); filter:blur(5px); }
+.reveal.show { opacity:1; transform:none; filter:none; }
+.person img { transition:opacity 2s ease,transform 2s cubic-bezier(.18,.78,.18,1),filter 2s ease !important; }
+</style>
+
+
+<style id="final-polish-v2">
+.page {
+  background:#fffdf9 url("satin-long.jpg") center top / 100% auto no-repeat !important;
+}
+.page > section:not(.hero),
+.page > section:not(.hero) .couple-section,
+.page > section:not(.hero) .calendar {
+  background:transparent !important;
+  background-image:none !important;
+}
+.page > section:not(.hero)::after { display:none !important; }
+.page:before { display:none !important; }
+
+.hero .names {
+  font-family:"Great Vibes","Marck Script",cursive !important;
+  font-weight:400 !important;
+  font-size:76px !important;
+  line-height:.82 !important;
+  letter-spacing:.01em !important;
+}
+.hero .amp {
+  font-family:"Great Vibes","Marck Script",cursive !important;
+  font-weight:400 !important;
+  font-size:38px !important;
+  margin:5px 0 2px !important;
+}
+
+.venue-address {
+  display:inline-block;
+  font-size:20px !important;
+  line-height:1.5 !important;
+}
+.venue-address .hall-note { font-size:20px !important; }
+
+@media(max-width:420px){
+  .hero .names{font-size:64px !important}
+  .hero .amp{font-size:33px !important}
+  .venue-address,.venue-address .hall-note{font-size:19px !important}
+}
+</style>
+
+<style id="final-unified-satin-and-script">
+/* Unified satin: one continuous texture, with no section-to-section reset. */
+.page {
+  background-color:#fbfaf7 !important;
+  background-image:linear-gradient(rgba(255,255,255,.08),rgba(255,255,255,.08)),url("satin-seamless.jpg") !important;
+  background-size:100% auto !important;
+  background-position:center top !important;
+  background-repeat:repeat-y !important;
+}
+.page > section:not(.hero) {
+  background:transparent !important;
+  background-image:none !important;
+}
+.page > section:not(.hero)::after {
+  display:none !important;
+}
+/* Keep intentional cards, but soften their edges so the page reads as one fabric surface. */
+.couple-section, #invite { background:transparent !important; }
+.note, .rsvp, .vote-card, .calendar {
+  box-shadow:0 10px 28px rgba(70,55,30,.06) !important;
+}
+/* Main-screen names only: elegant Cyrillic calligraphic style matching the reference. */
+.hero .names {
+  font-family:"Marck Script",cursive !important;
+  font-weight:400 !important;
+  font-size:72px !important;
+  line-height:.92 !important;
+  letter-spacing:.015em !important;
+  text-shadow:0 2px 14px rgba(0,0,0,.20) !important;
+}
+.hero .amp {
+  font-family:"Marck Script",cursive !important;
+  font-weight:400 !important;
+  font-size:34px !important;
+  margin:5px 0 !important;
+}
+@media(max-width:420px){
+  .hero .names{font-size:60px !important;}
+  .hero .amp{font-size:30px !important;}
+}
+/* Address/location text: easier to read on phones. */
+.location-time, .place-time {
+  font-size:27px !important;
+  line-height:1.35 !important;
+}
+</style>
+
+</head>
+
+<body>
+<audio id="weddingMusic" preload="auto" loop><source src="music/wedding-music.mp3" type="audio/mpeg"></audio>
+
+<div id="envelope-screen" role="button" tabindex="0" aria-label="Открыть приглашение">
+  <div class="envelope-stage">
+    <div class="envelope-wrap">
+      <div class="envelope-back"></div>
+      <div class="envelope-letter">
+        <div class="letter-kicker">ПРИГЛАШЕНИЕ НА СВАДЬБУ</div>
+        <div class="letter-names">ДАНИЛА &amp; АРИНА</div>
+        <div class="letter-date">09 · 10 · 2026</div>
+      </div>
+      <div class="envelope-flap"></div>
+      <div class="envelope-front"></div>
+      <div class="envelope-seal">♡</div>
+      <div class="envelope-title">ДАНИЛА &amp; АРИНА</div>
+    </div>
+    <div class="envelope-hint">Нажмите, чтобы открыть приглашение</div>
+  </div>
+</div>
+
+<div class="page">
+  <button class="music" id="musicBtn" aria-label="Музыка">♪</button>
+
+  <section class="hero" id="top">
+    <img id="heroImg" src="main-photo.jpg" alt="Данила и Арина">
+    <div class="hero-content">
+      <div class="names"><span id="heroNames">ДАНИЛА</span><div class="amp">&</div><span id="heroNames2">АРИНА</span></div>
+      <div class="hero-sub" id="heroSub">БУДЕМ СЧАСТЛИВЫ РАЗДЕЛИТЬ ЭТОТ ДЕНЬ ВМЕСТЕ С ВАМИ</div>
+      <div class="date" id="heroDate">09 · 10 · 2026</div>
+      <div id="countdown" style="margin-top:18px;font:18px 'Cormorant Garamond';letter-spacing:.08em"></div>
+    </div>
+  </section>
+
+  <section id="invite" class="reveal">
+    <div class="divider"></div>
+    <h2>ДОРОГОЙ<br>ГОСТЬ!</h2>
+    <p id="welcomeText">Мы рады сообщить Вам, что состоится самое главное торжество в нашей жизни — день нашей свадьбы!</p>
+    <p id="welcomeText2">Приглашаем Вас разделить с нами радость этого незабываемого дня.</p>
+  </section>
+
+  <section class="reveal couple-section">
+    <div class="couple">
+      <div class="person"><img src="photos/danila.jpg" alt="Данила"><div id="name1">Данила</div></div>
+      <div class="person"><img src="photos/arina.jpg" alt="Арина"><div id="name2">Арина</div></div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="divider"></div>
+    <h2>ДАТА И ВРЕМЯ</h2>
+    <p class="place-time">Время: <strong id="confirmTime">14:30</strong></p>
+    <div class="no-late">ПРОСЬБА НЕ ОПАЗДЫВАТЬ</div>
+    <div class="calendar">
+      
+      <div class="cal-title" id="monthTitle">ОКТЯБРЬ</div>
+      <div class="grid" id="calendarGrid"></div>
+    </div>
+  </section>
+
+  <section class="reveal">
+    <div class="divider"></div>
+    <h2>МЕСТО<br>ПРОВЕДЕНИЯ</h2>
+    <p><strong id="venueName">Diadema</strong><br><span id="venueAddress" class="venue-address">ул. Кажибекова, ст1, Караганда<br><span class="hall-note">Малый зал</span></span></p>
+    <p class="location-time">Время: <strong id="locationTime">14:30</strong></p>
+    <img class="photo venue-photo" src="photos/venue.jpg" alt="Ресторан Diadema">
+    <div class="map-card"><div class="pin">📍</div></div>
+    <div style="text-align:center">
+      <a class="gold-btn" id="gisBtn" href="https://go.2gis.com/yETk1" target="_blank" rel="noopener">КАК ДОБРАТЬСЯ В 2ГИС</a>
+    </div>
+    <p class="small-note" style="margin-top:18px">Нажмите кнопку — откроется карточка ресторана в 2ГИС, где можно построить маршрут.</p>
+  </section>
+
+  <section class="reveal">
+    <div class="divider"></div>
+    <h2>ПРИСУТСТВИЕ</h2>
+    <p>Пожалуйста, сообщите, сможете ли Вы разделить с нами этот день.</p>
+    <div class="vote-card">
+      <div class="vote-buttons">
+        <button class="vote-btn" data-answer="Буду">Я ПРИДУ</button>
+        <button class="vote-btn secondary" data-answer="Не смогу прийти">НЕ СМОГУ ПРИЙТИ</button>
+      </div>
+      <p id="voteStatus" class="vote-status"></p>
+      <input id="guestName" class="vote-input" placeholder="Ваше имя">
+      <textarea id="guestMessage" class="vote-input" placeholder="Сообщение для жениха и невесты"></textarea>
+      <button id="voteSend" class="gold-btn vote-send">ОТПРАВИТЬ ОТВЕТ</button>
+      <p class="small-note">Выберите один вариант и при желании оставьте сообщение.</p>
+    </div>
+  </section>
+
+  <section class="footer reveal">
+    <div class="divider"></div>
+    <div class="names"><span id="footerNames1">ДАНИЛА</span><div class="amp">&</div><span id="footerNames2">АРИНА</span></div>
+    <p style="margin-top:20px" id="footerDate">09 · 10 · 2026</p>
+  </section>
+</div>
+
+</div>
+</div>
+
+<script>
+const defaults={
+ name1:"Данила",name2:"Арина",date:"2026-10-09",time:"14:30",
+ venue:"Diadema",address:"ул. Кажибекова, ст1, Караганда",
+ gis:"https://go.2gis.com/yETk1",
+ welcome:"Мы рады сообщить Вам, что состоится самое главное торжество в нашей жизни — день нашей свадьбы!",
+ welcome2:"Приглашаем Вас разделить с нами радость этого незабываемого дня.",
+ gift:"Ваше присутствие в день нашей свадьбы — самый значимый подарок для нас!",
+ confirm:"01.10.2026",
+ heroText:"БУДЕМ СЧАСТЛИВЫ РАЗДЕЛИТЬ ЭТОТ ДЕНЬ ВМЕСТЕ С ВАМИ"
+};
+let cfg={...defaults,...JSON.parse(localStorage.getItem("weddingCfg")||"{}")};
+function formatDate(d){const [y,m,day]=d.split("-");return `${day} · ${m} · ${y}`;}
+function apply(){
+ document.getElementById("heroNames").textContent=cfg.name1.toUpperCase();
+ document.getElementById("heroNames2").textContent=cfg.name2.toUpperCase();
+ document.getElementById("footerNames1").textContent=cfg.name1.toUpperCase();
+ document.getElementById("footerNames2").textContent=cfg.name2.toUpperCase();
+ document.getElementById("heroDate").textContent=formatDate(cfg.date);
+ document.getElementById("footerDate").textContent=formatDate(cfg.date);
+ document.getElementById("heroSub").textContent=cfg.heroText;
+ document.getElementById("name1").textContent=cfg.name1;
+ document.getElementById("name2").textContent=cfg.name2;
+ document.getElementById("welcomeText").textContent=cfg.welcome;
+ document.getElementById("welcomeText2").textContent=cfg.welcome2;
+ document.getElementById("confirmTime").textContent=cfg.time;
+ document.getElementById("locationTime").textContent=cfg.time;
+document.getElementById("venueName").textContent=cfg.venue;
+ document.getElementById("venueAddress").textContent=String(cfg.address).replace(/<[^>]*>/g, "");
+ document.getElementById("venueAddress").insertAdjacentHTML("beforeend", '<br><span class="hall-note">Малый зал</span>');
+ document.getElementById("gisBtn").href=cfg.gis;
+ buildCalendar();
+}
+function buildCalendar(){
+ const d=new Date(cfg.date+"T12:00:00"),y=d.getFullYear(),m=d.getMonth(),selected=d.getDate();
+ const names=["ПН","ВТ","СР","ЧТ","ПТ","СБ","ВС"];
+ const first=(new Date(y,m,1).getDay()+6)%7,days=new Date(y,m+1,0).getDate();
+ document.getElementById("monthTitle").textContent=d.toLocaleString("ru-RU",{month:"long"}).toUpperCase();
+ let out=names.map(x=>`<div class="day"><b>${x}</b></div>`).join("");
+ for(let i=0;i<first;i++)out+="<div></div>";
+ for(let n=1;n<=days;n++)out+=`<div class="day ${n===selected?"selected":""}">${n}</div>`;
+ document.getElementById("calendarGrid").innerHTML=out;
+}
+const audio=new Audio("wedding-music.mp3");audio.loop=true;let playing=false;
+document.getElementById("musicBtn").onclick=async()=>{
+ if(!playing){try{await audio.play();playing=true;musicBtn.textContent="❚❚";}catch(e){}}
+ else{audio.pause();playing=false;musicBtn.textContent="♪";}
+};
+function countdown(){
+ const diff=new Date(cfg.date+"T"+cfg.time+":00").getTime()-Date.now();
+ if(diff<=0){document.getElementById("countdown").textContent="Этот день уже наступил ♥";return;}
+ const d=Math.floor(diff/864e5),h=Math.floor(diff%864e5/36e5),m=Math.floor(diff%36e5/6e4),s=Math.floor(diff%6e4/1e3);
+ document.getElementById("countdown").textContent=`${d} дней · ${String(h).padStart(2,"0")} : ${String(m).padStart(2,"0")} : ${String(s).padStart(2,"0")}`;
+}
+const TELEGRAM_WEB_APP_URL='https://script.google.com/macros/s/AKfycby5E_-LFohN7WP1J0V6QESdNPBcxXkx8BTX582kcUDX2f7efiy-rc4cyM3CBFNyIYU8/exec';
+let selectedVote="";
+document.querySelectorAll(".vote-btn").forEach(btn=>{
+ btn.addEventListener("click",()=>{
+   selectedVote=btn.dataset.answer;
+   document.querySelectorAll(".vote-btn").forEach(x=>x.classList.remove("active"));
+   btn.classList.add("active");
+   document.getElementById("voteStatus").textContent="Вы выбрали: "+selectedVote;
+ });
+});
+document.getElementById("voteSend").onclick=async()=>{
+ const name=document.getElementById("guestName").value.trim();
+ const message=document.getElementById("guestMessage").value.trim();
+ const status=document.getElementById("voteStatus");
+ if(!selectedVote){status.textContent="Сначала выберите вариант.";return;}
+ if(!name){status.textContent="Пожалуйста, укажите имя.";return;}
+ status.textContent="Отправляем ответ…";
+ try{
+   await fetch(TELEGRAM_WEB_APP_URL,{
+     method:"POST",
+     mode:"no-cors",
+     headers:{"Content-Type":"text/plain;charset=utf-8"},
+     body:JSON.stringify({name:name,answer:selectedVote,message:message})
+   });
+   status.textContent="Спасибо, "+name+"! Ваш ответ отправлен ❤️";
+   document.getElementById("guestMessage").value="";
+ }catch(e){
+   status.textContent="Не удалось отправить ответ. Попробуйте ещё раз.";
+ }
+};
+
+let revealStarted=false;
+let io=null;
+function startRevealSystem(){
+  if(revealStarted)return;
+  revealStarted=true;
+  document.documentElement.classList.add("reveal-animation");
+
+  if("IntersectionObserver" in window){
+    io=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add("show");
+          io.unobserve(entry.target);
+        }
+      });
+    },{
+      threshold:0.18,
+      rootMargin:"0px 0px -8% 0px"
+    });
+    document.querySelectorAll(".reveal").forEach(function(x,i){
+      x.style.transitionDelay=Math.min(i*70,280)+"ms";
+      io.observe(x);
+    });
+  } else {
+    document.querySelectorAll(".reveal").forEach(function(x){x.classList.add("show");});
+  }
+}
+apply();
+countdown();
+setInterval(countdown,1000);
+setTimeout(startRevealSystem,1500);
+
+</script>
+
+<script id="envelope-final-js">
+(function(){
+  function boot(){
+    var screen=document.getElementById('envelope-screen');
+    if(!screen)return;
+    document.documentElement.classList.add('envelope-lock');
+    var opened=false;
+    function openIt(e){
+      if(e){e.preventDefault();e.stopPropagation();}
+      if(opened)return; opened=true;
+      screen.classList.add('opening');
+      setTimeout(function(){
+        screen.classList.add('hidden');
+        document.documentElement.classList.remove('envelope-lock');
+        screen.setAttribute('aria-hidden','true');
+        window.scrollTo(0,0);
+        startRevealSystem();
+      },1500);
+    }
+    screen.addEventListener('click',openIt,{passive:false});
+    screen.addEventListener('touchend',openIt,{passive:false});
+    screen.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){openIt(e);}});
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot);else boot();
+})();
+</script>
+
+
+<script>
+(function(){
+  function forceWeddingTime(){
+    document.querySelectorAll('body *').forEach(function(el){
+      if (el.children.length === 0 && el.textContent.indexOf('14:00') !== -1) {
+        el.textContent = el.textContent.replace(/14:00/g, '14:30');
+      }
+      if ('value' in el && typeof el.value === 'string' && el.value.indexOf('14:00') !== -1) {
+        el.value = el.value.replace(/14:00/g, '14:30');
+      }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', forceWeddingTime);
+  } else {
+    forceWeddingTime();
+  }
+  setTimeout(forceWeddingTime, 300);
+})();
+</script>
+
+
+
+<script id="wedding-music-start">
+(function(){
+  var started=false;
+  function startMusic(){
+    if(started)return;
+    var a=document.getElementById("weddingMusic");
+    if(!a)return;
+    a.volume=0.65;
+    var p=a.play();
+    if(p && p.then){
+      p.then(function(){started=true;}).catch(function(){});
+    }
+  }
+
+  // Browsers may block autoplay with sound before a user gesture.
+  // The envelope tap/click is the first gesture, so use it to start the song.
+  var screen=document.getElementById("envelope-screen");
+  if(screen){
+    screen.addEventListener("click",startMusic,{passive:true});
+    screen.addEventListener("touchend",startMusic,{passive:true});
+  }
+
+  ["pointerdown","touchstart","keydown","click"].forEach(function(evt){
+    document.addEventListener(evt,startMusic,{passive:true});
+  });
+
+  window.addEventListener("load",function(){
+    setTimeout(startMusic,250);
+  });
+})();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Редактор свадебного приглашения</title>
+<style>
+body{margin:0;background:#20232a;font-family:Arial,sans-serif;color:#29251f}.wrap{max-width:760px;margin:auto;background:#f3e7d5;min-height:100vh;padding:24px;box-sizing:border-box}
+h1,h2{font-family:Georgia,serif;font-weight:400}.card{background:#fffaf3;padding:20px;border-radius:16px;margin:16px 0;box-shadow:0 8px 25px #0001}
+label{display:block;margin:13px 0 5px;font-size:13px;font-weight:bold}input,textarea{width:100%;box-sizing:border-box;padding:12px;border:1px solid #c9baa1;border-radius:10px;background:white;font:14px Arial}textarea{min-height:85px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.btn{border:0;border-radius:10px;padding:13px 16px;background:#b5a16b;color:white;font-weight:bold;cursor:pointer}.btn.dark{background:#5c5750}
+.sticky{position:sticky;bottom:0;background:#f3e7d5;padding:14px 0;display:flex;gap:10px;z-index:5}.sticky .btn{flex:1}.hint{font-size:12px;line-height:1.5;color:#665e54}.status{display:none;padding:12px;border-radius:10px;background:#e7f1df;margin-top:12px}
+</style></head><body><div class="wrap">
+<h1>Редактор свадебного приглашения</h1>
+<p class="hint">Сначала выбери ZIP сайта. Если всё сделано правильно, появится сообщение «ZIP успешно загружен». После изменений нажми «Скачать обновлённый ZIP».</p>
+<div class="card"><h2>1. Загрузить ZIP</h2><input id="zip" type="file" accept=".zip"><p id="zipName" class="hint"></p></div>
+<div id="form" style="display:none">
+<div class="card"><h2>Основное</h2><div class="grid"><div><label>Имя жениха</label><input id="name1"></div><div><label>Имя невесты</label><input id="name2"></div></div><div class="grid"><div><label>Дата свадьбы</label><input id="date" type="date"></div><div><label>Время</label><input id="time"></div></div><label>Фраза на первом экране</label><textarea id="heroText"></textarea></div>
+<div class="card"><h2>Приглашение</h2><label>Основной текст</label><textarea id="welcome"></textarea><label>Второй текст</label><textarea id="welcome2"></textarea></div>
+<div class="card"><h2>Ресторан и 2ГИС</h2><label>Название ресторана</label><input id="venue"><label>Адрес</label><input id="address"><label>Ссылка 2ГИС</label><input id="gis"></div>
+<div class="card"><h2>Фотографии и музыка</h2><label>Главная фотография</label><input id="mainPhoto" type="file" accept="image/*"><label>Фото Данилы (круг)</label><input id="danilaPhoto" type="file" accept="image/*"><label>Фото Арины (круг)</label><input id="arinaPhoto" type="file" accept="image/*"><label>Фото ресторана Diadema</label><input id="venuePhoto" type="file" accept="image/*"><label>Музыка MP3</label><input id="music" type="file" accept=".mp3,audio/mpeg"></div>
+<div class="sticky"><button class="btn" onclick="downloadZip()">СКАЧАТЬ ОБНОВЛЁННЫЙ ZIP</button><button class="btn dark" onclick="preview()">ПРЕДПРОСМОТР</button></div>
+<div id="status" class="status"></div></div></div>
+<script src="jszip.min.js"></script>
+<script>
+let zipObj=null,indexText="";
+const $=id=>document.getElementById(id);
+const defaults={name1:"Данила",name2:"Арина",date:"2026-10-09",time:"14:30",heroText:"БУДЕМ СЧАСТЛИВЫ РАЗДЕЛИТЬ ЭТОТ ДЕНЬ ВМЕСТЕ С ВАМИ",welcome:"Мы рады сообщить Вам, что состоится самое главное торжество в нашей жизни — день нашей свадьбы!",welcome2:"Приглашаем Вас разделить с нами радость этого незабываемого дня.",venue:"Diadema",address:"ул. Кажибекова, ст1, Караганда",gis:"https://go.2gis.com/yETk1",gift:"Ваше присутствие в день нашей свадьбы — самый значимый подарок для нас!",confirm:"01.10.2026"};
+function status(t){$("status").textContent=t;$("status").style.display="block"}
+function fill(){
+ for(const k in defaults) if($(k)) $(k).value=defaults[k];
+}
+$("zip").addEventListener("change",async e=>{
+ try{
+  const f=e.target.files[0];if(!f)return;
+  $("zipName").textContent="Загрузка ZIP…";
+  if(typeof JSZip==="undefined")throw new Error("Редактор не нашёл jszip.min.js. Убедись, что editor.html и jszip.min.js лежат рядом.");
+  zipObj=await JSZip.loadAsync(f);
+  if(!zipObj.file("index.html"))throw new Error("В ZIP нет index.html.");
+  indexText=await zipObj.file("index.html").async("string");
+  fill();$("form").style.display="block";$("zipName").textContent=f.name+" — ZIP успешно загружен";status("ZIP успешно загружен. Можно редактировать.");
+ }catch(err){$("zipName").textContent="Ошибка загрузки";alert("Ошибка: "+err.message)}
+});
+function setText(h,id,v){const r=new RegExp('(id=["\\']'+id+'["\\'][^>]*>)[\\s\\S]*?(</[^>]+>)','i');return h.replace(r,(m,a,b)=>a+v+b)}
+function apply(){
+ let h=indexText;
+ const map={heroNames:$("name1").value.toUpperCase(),heroNames2:$("name2").value.toUpperCase(),footerNames1:$("name1").value.toUpperCase(),footerNames2:$("name2").value.toUpperCase(),heroSub:$("heroText").value,name1:$("name1").value,name2:$("name2").value,welcomeText:$("welcome").value,welcomeText2:$("welcome2").value,venueName:$("venue").value,venueAddress:$("address").value};
+ for(const [id,v] of Object.entries(map))h=setText(h,id,v);
+ const date=$("date").value,[y,m,d]=date.split("-");
+ h=setText(h,"heroDate",`${d} · ${m} · ${y}`);h=setText(h,"footerDate",`${d} · ${m} · ${y}`);
+ h=h.replace(/gisBtn" href="[^"]*"/,`gisBtn" href="${$("gis").value}"`);
+ const cfg={name1:$("name1").value,name2:$("name2").value,date,time:$("time").value,venue:$("venue").value,address:$("address").value,gis:$("gis").value,welcome:$("welcome").value,welcome2:$("welcome2").value,heroText:$("heroText").value};
+ h=h.replace(/let cfg=\{[\s\S]*?\};/,'let cfg='+JSON.stringify(cfg)+';');
+ return h;
+}
+async function downloadZip(){
+ if(!zipObj){alert("Сначала выбери ZIP.");return}
+ zipObj.file("index.html",apply());
+ const p=$("mainPhoto").files[0];if(p)zipObj.file("main-photo.jpg",p);
+ const d=$("danilaPhoto").files[0];if(d)zipObj.file("photos/danila.jpg",d);
+ const a=$("arinaPhoto").files[0];if(a)zipObj.file("photos/arina.jpg",a);
+ const v=$("venuePhoto").files[0];if(v)zipObj.file("photos/venue.jpg",v);
+ const m=$("music").files[0];if(m)zipObj.file("wedding-music.mp3",m);
+ const blob=await zipObj.generateAsync({type:"blob"});
+ const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="wedding_invitation_updated.zip";a.click();
+ setTimeout(()=>URL.revokeObjectURL(a.href),1500);status("Готово! Обновлённый ZIP скачан.");
+}
+function preview(){if(!indexText){alert("Сначала выбери ZIP.");return}const b=new Blob([apply()],{type:"text/html"});window.open(URL.createObjectURL(b),"_blank")}
+</script></body></html>

@@ -1,0 +1,6 @@
+Telegram уже подключён к сайту через этот Web App URL:
+https://script.google.com/macros/s/AKfycby5E_-LFohN7WP1J0V6QESdNPBcxXkx8BTX582kcUDX2f7efiy-rc4cyM3CBFNyIYU8/exec
+
+На сайте форма отправляет POST с полями name, answer и message.
+
+В Google Apps Script обязательно должна быть функция doPost(e), которая читает e.postData.contents и отправляет сообщение ботом. После изменения doPost нужно заново создать/обновить развёртывание Web App.
