@@ -300,6 +300,39 @@ html.reveal-animation .reveal:not(.show) { opacity:0; transform:translateY(64px)
 }
 </style>
 
+
+<style id="venue-readability-final">
+.venue-address, #venueName {
+  font-family:"Cormorant Garamond",Georgia,serif !important;
+  font-size:24px !important;
+  line-height:1.45 !important;
+}
+.venue-address .hall-note { font-size:23px !important; }
+@media(max-width:420px){
+  .venue-address, #venueName { font-size:22px !important; }
+  .venue-address .hall-note { font-size:21px !important; }
+}
+</style>
+
+
+<style id="vote-selection-final">
+.vote-buttons .vote-btn {
+  background:rgba(255,255,255,.72) !important;
+  color:var(--ink) !important;
+  border:1px solid var(--gold) !important;
+  box-shadow:none !important;
+}
+.vote-buttons .vote-btn.active {
+  background:var(--gold) !important;
+  color:#fff !important;
+  transform:translateY(-2px) scale(1.01);
+  box-shadow:0 9px 24px rgba(111,93,53,.24) !important;
+}
+.vote-buttons .vote-btn:not(.active):hover {
+  background:#f4ead7 !important;
+}
+</style>
+
 </head>
 
 <body>
@@ -366,7 +399,6 @@ html.reveal-animation .reveal:not(.show) { opacity:0; transform:translateY(64px)
     <div class="divider"></div>
     <h2>МЕСТО<br>ПРОВЕДЕНИЯ</h2>
     <p><strong id="venueName">Diadema</strong><br><span id="venueAddress" class="venue-address">ул. Кажибекова, ст1, Караганда<br><span class="hall-note">Малый зал</span></span></p>
-    <p class="location-time">Время: <strong id="locationTime">14:30</strong></p>
     <img class="photo venue-photo" src="photos/venue.jpg" alt="Ресторан Diadema">
     <div class="map-card"><div class="pin">📍</div></div>
     <div style="text-align:center">
@@ -428,7 +460,6 @@ function apply(){
  document.getElementById("welcomeText").textContent=cfg.welcome;
  document.getElementById("welcomeText2").textContent=cfg.welcome2;
  document.getElementById("confirmTime").textContent=cfg.time;
- document.getElementById("locationTime").textContent=cfg.time;
 document.getElementById("venueName").textContent=cfg.venue;
  document.getElementById("venueAddress").textContent=String(cfg.address).replace(/<[^>]*>/g, "");
  document.getElementById("venueAddress").insertAdjacentHTML("beforeend", '<br><span class="hall-note">Малый зал</span>');
