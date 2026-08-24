@@ -1,0 +1,47 @@
+name: Fix wedding music
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  fix-music:
+    if: github.event.head_commit.message != 'Fix wedding music path and autoplay'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Fix music path and autoplay
+        shell: python
+        run: |
+          from pathlib import Path
+
+          p = Path('index.html')
+          s = p.read_text(encoding='utf-8')
+
+          # The MP3 is stored in the repository root.
+          s = s.replace('src="music/wedding-music.mp3"', 'src="wedding-music.mp3"')
+
+          # Use the existing audio element everywhere so there is only one player.
+          s = s.replace('const audio=new Audio("wedding-music.mp3");audio.loop=true;let playing=false;', 'const audio=document.getElementById("weddingMusic");audio.loop=true;let playing=false;')
+
+          # Start the music from the same user click that opens the envelope.
+          old = "screen.classList.add('opening');"
+          new = "screen.classList.add('opening');\n      var music=document.getElementById('weddingMusic');\n      if(music){ music.volume=0.55; var p=music.play(); if(p&&p.then){ p.then(function(){ playing=true; var mb=document.getElementById('musicBtn'); if(mb) mb.textContent='❚❚'; }).catch(function(){}); } }"
+          if old in s and 'var music=document.getElementById' not in s:
+              s = s.replace(old, new, 1)
+
+          p.write_text(s, encoding='utf-8')
+
+      - name: Commit fix
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git diff --cached --quiet || git commit -m "Fix wedding music path and autoplay"
+          git push
